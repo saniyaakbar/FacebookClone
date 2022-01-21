@@ -1,0 +1,60 @@
+<%- include ./partials/header.ejs %>
+
+  <h1>All Posts:</h1>
+  <div id="box">
+
+    <%if(user.following.length > 0){ %>
+      <%user.following.forEach(function(following){ %>
+        <%following.posts.forEach(function(post){ %>
+
+         
+
+            <div class="card my-3" style="width: 18rem;">
+              <img src="../images/uploads/<%=post.image%>" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">  User |  <a href="/view/<%=post.postingUser%>" class="btn btn-primary my-3"><%=post.postingUser%> </a></h5>
+                <p class="card-text"><%=post.content%></p>
+               
+                <a href="/likes/<%=post._id%>" class="btn btn-primary my-3"><%=post.likes.length%> Likes</a>
+                <a href="/comment/<%=post._id%>" class="btn btn-warning"> <%=post.comments.length%> Comment</a>
+
+               
+              </div>
+            </div>
+             
+         
+      <% })%>
+        <% })%>
+  
+     
+
+      <% } else{%>
+        you are not following anyone so your feed is empty.
+        <%}%>
+ 
+  
+     
+        </div>
+
+        <div id="next">
+          <a href="/homePage/1">1</a>
+        <a href="/homePage/2">2</a>
+        <a href="/homePage/3">3</a>
+        <a href="/homePage/4">4</a>
+        <a href="/homePage/5">5</a>
+        <a href="/homePage/6">6</a>
+        <a href="/homePage/7">7</a>
+        <a href="/homePage/8">8</a>
+        <a href="/homePage/9">9</a>
+        <a href="/homePage/10">10</a>
+        <a href="/homePage/<%=page%>">Next</a>
+        
+
+
+        
+        </div>
+
+        
+</div>
+
+<%- include ./partials/footer.ejs %>

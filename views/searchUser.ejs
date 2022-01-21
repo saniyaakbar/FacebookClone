@@ -1,0 +1,123 @@
+<%- include ./partials/header.ejs %>
+
+    <div id="main">
+        <div class="card bg-dark text-white">
+            <img src="https://images.unsplash.com/photo-1636753262782-edd4c451ca53?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80" class="card-img" alt="...">
+            <div class="card-img-overlay .d-flex" >
+                <div class="card" id="profilePic" style="width: 18rem;">
+                    <img src="https://images.unsplash.com/photo-1636517523336-9bb4decaeb66?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=464&q=80" class="card-img-top" alt="...">
+                   
+                  </div>
+                <h1 id="Username"><%=name.username%></h1>
+               
+            </div>
+           
+
+          </div>
+
+          
+      
+        <div id="box">
+            <h1>
+              <%=name.username%>       
+              <%if(name.story === null){%>
+                
+              <%}else{%>
+                <style>
+                  #storyCard{
+                    position: absolute;
+                   left: 130%;
+                    top: 40%;
+                  }
+                </style>
+                <div class="card" id="storyCard" style="width: 18rem;">
+                  <img src="../images/uploads/<%=name.story.currentStory%>" class="card-img-top" alt="...">
+                  <div class="card-body">
+                 
+                    <p class="card-text"><%=name.story.content%></p>
+                    
+                  </div>
+                </div>
+                
+             <% }%>
+            </h1>
+            <h3>Hii! I just started using orion!</h3>
+        <%if(user.following.indexOf(name._id) === -1){%>
+            <button class="text-reset mx-5 p-2 ">
+                <a href="/follow/<%=name._id%>" class="text-reset text-decoration-none ">Follow</a>
+                <a href="/following/<%=name._id%>" class="mx-2 text-reset text-decoration-none mx-4">Following</a>
+                <a href="/followers/<%=name._id%>" class="mx-2 text-reset text-decoration-none">Followers</a>
+            </button>
+        <%}else{%>
+            <button class="text-reset mx-5 p-2 ">
+                <a href="/follow/<%=name._id%>" class="text-reset text-decoration-none ">Unfollow</a>
+                <a href="/following/<%=name._id%>" class="mx-2 text-reset text-decoration-none mx-4">Following</a>
+                <a href="/followers/<%=name._id%>" class="mx-2 text-reset text-decoration-none">Followers</a>
+            </button>
+            <%}%>
+            
+        </div>
+
+        
+
+    </div>
+
+    <div id="main2">
+        <%if(name.posts.length <= 0 && name.sharedPosts.length <= 0 ){%>
+            <h1>No posts at the moment</h1>
+        <%} else{%>
+
+            <div id="box2">
+             
+              <%name.posts.forEach(function(post){%>
+
+                <div class="card my-3" style="width: 18rem;">
+                  <img src="../images/uploads/<%=post.image%>" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">  User | <%=name.username%></h5>
+                    <p class="card-text"><%=post.content%></p>
+                   
+                    <a href="/likes/<%=post._id%>" class="btn btn-primary my-3"><%=post.likes.length%> Likes</a>
+                    <a href="/comment/<%=post._id%>" class="btn btn-warning"> <%=post.comments.length%> Comment</a>
+
+                   
+                  </div>
+                </div>
+                 
+                  <% })%>
+              
+               
+            </div>
+    
+    
+            
+            <div id="box2">
+               
+                    <%name.sharedPosts.forEach(function(post){%>
+                        <div class="card">
+                            <div class="card-header">
+                              <%=name.username%> Shared <%=post.postingUser%>'s post
+                            </div>
+                            <div class="card-body">
+                              
+                              <p class="card-text"><%=post.content%></p>
+                              <p></p>
+                              <a href="/likes/<%=post._id%>" class="btn btn-primary"><%=post.likes.length%> Likes</a>
+                              <a href="/comment/<%=post._id%>" class="btn btn-warning"> <%=post.comments.length%> Comment</a>
+                              <a href="/share/<%=post._id%>" class="btn btn-warning"> Reshare</a>
+                            </div>
+                          </div>
+                        <% })%>
+              
+           
+
+         <%  }%>
+        
+
+    </div>
+
+
+
+    </h1>
+
+    <%- include ./partials/footer.ejs %>

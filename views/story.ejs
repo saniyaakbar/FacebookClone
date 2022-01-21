@@ -1,0 +1,19 @@
+<%- include ./partials/header.ejs %>
+<style>
+    #main{
+        position: absolute;
+        top: 50%;
+        left: 40%;
+        
+    }
+</style>
+<div id="main">
+
+    <form action="/storyNow" enctype="multipart/form-data" method="post">
+        <input type="text" placeholder="Text" name="story">
+        <input type="file"  method="post", name="picture">
+        <input type="submit">
+    </form>
+</div>
+
+<%- include ./partials/footer.ejs %>

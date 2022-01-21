@@ -1,0 +1,112 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+  }
+  
+  html, body{
+    height: 100%;
+    width: 100%;
+  }
+  
+  #main{
+      padding: 40px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #4E4F93;
+    color: white;
+    font-family: voyage;
+  }
+
+  #left{
+    position: relative;
+    height: 80vh;
+    width: 60%;
+    /* background-color: #fff; */
+    
+  }
+
+  #welcome-emoji{
+      position: absolute;
+      top: 10%;
+      right: 0%;
+      height: 60vh;
+      width: 50%;
+      background-image: url(../images/welcome.png);
+      background-size: cover;
+      opacity: 0.2;
+  }
+
+  #left p{
+    position: absolute;
+    top: 30%;
+    font-size: 70px;
+    color: white;
+    }
+
+  #left #p-two{
+      top: 45%;
+  }
+
+  #right{
+      position: relative;
+      height: 80vh;
+      width: 30%;
+      /* background-color: wheat; */
+  }
+
+  #form{
+      position: absolute;
+      top: 8%;
+      right: 0%;
+      text-align: center;
+      padding: 30px;
+      height: 75vh;
+      width: 85%;
+      display: flex;
+      flex-direction: column;
+      background-color: #E8E8E8;
+      font-family: product sans;
+      color: black;
+  }
+
+  #form p{
+    font-size: 40px;
+  }
+
+  #form #small-text{
+      font-size: 20px;
+  }
+
+  form{
+      margin-top: 40px;
+  }
+
+  input{
+      padding: 10px;
+      height: 40px;
+      width: 85%;
+      margin-top: 10px;
+  }
+
+  #submit{
+      margin-top: 40px;
+      width: 30%;
+      background-color: #4E4F93;
+      border-radius: 30px;
+      color: white;
+  }
+
+  #username{
+    outline: none;
+  }
+
+  h5{
+    color: red;
+    margin-top: 5px;
+    margin-right: 53px;
+    display: none;
+  }

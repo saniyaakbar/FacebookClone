@@ -1,0 +1,72 @@
+<%-include ./partials/header.ejs %>
+<style>
+  *{
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+
+html, body{
+  height: 100%;
+  width: 100%;
+}
+
+#main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #4E4F93;
+  color: white;
+  font-family: voyage;
+}
+
+#logo{
+  height: 160px;
+  width: 142px;
+  background-image: url(../images/logo.png);
+  background-position: center;
+  background-size: contain;
+}
+
+#main p{
+  font-size: 62px;
+}
+
+#buttons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  width: 280px;
+  /* background-color: violet; */
+}
+
+.login-signup-buttons{
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  height: 40px;
+  width: 100px;
+  background-color: #302D77;
+  border-radius: 20px;
+  font-family: product sans;
+}
+</style>
+  <div id="main">
+    <!-- <div id="logo"></div> -->
+    <p>Welcome</p>
+    <div id="buttons">
+
+    <a href="/loginPaage"> <button class="login-signup-buttons">Login</button></a>
+    <a href="/signup">  <button class="login-signup-buttons">Sign-up</button></a>
+    
+    </div>
+ 
+  </div>
+
+  <%-include ./partials/footer.ejs %>

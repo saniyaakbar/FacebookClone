@@ -1,0 +1,149 @@
+
+<%- include ./partials/header.ejs%>
+<style>
+    *{
+        margin: 0%;
+        padding: 0%;
+        box-sizing: border-box;
+    }
+
+    html, body{
+        height: 100%;
+        width: 100%;
+    }
+
+    #main{
+      
+       padding-top: 80px;
+        min-height: 100vh;
+        width: 100%;
+        background-color: rgb(83, 83, 170);
+
+    }
+
+    #container2{
+        
+        min-height: 80vh;
+        width: 100%;
+        background-color: rgb(83, 83, 170);
+    }
+  
+    
+    button{
+        border-radius: 10px;
+        background-color: brown;
+        color: white;
+        height: 40px;
+        width: 100px;
+    }
+
+    button a{
+        color: white;
+        text-decoration: none;
+    }
+
+    #myCard{
+        margin-left: 5%;
+        width:30% ;
+    }
+    #formBox{
+        margin-left: 5%;
+    }
+
+    #PostBox{
+        /* margin-left: 5%; */
+        width: 50%;
+    }
+
+    #ifPart{
+        margin-left: 30px;
+    }
+
+</style>
+
+
+
+    <div id="main">
+        
+        
+
+        <div id="container2">
+
+        <% if(foundPost.comments.length <= 0) {%>
+            <div id="ifPart">
+                <div class="card" id="PostBox">
+                    <div class="card-header">
+                      <%=foundPost.postingUser%>
+                    </div>
+                    <div class="card-body">
+                      
+                      <p class="card-text"><%=foundPost.content%></p>
+                      <p></p>
+                      <a href="/likes/<%=foundPost._id%>" class="btn btn-primary"><%=foundPost.likes.length%> Likes</a>
+
+                      <a href="/comment/<%=foundPost._id%>" class="btn btn-warning"> <%=foundPost.comments.length%> Comment</a>
+                    </div>
+                  </div>
+                <h1>Be the first one to comment</h1>
+                <br>
+                <form action="/comment/<%=foundPost._id%>" method="post"> 
+                   
+                    <input type="text" name="comment" placeholder="Your Comment">
+                    <input type="submit">
+                </form>
+            </div>
+           
+        <%}else{%>
+            <div id="formBox">
+                <div class="card" id="PostBox">
+                    <div class="card-header">
+                      <%=foundPost.postingUser%>
+                    </div>
+                    <div class="card-body">
+                      
+                      <p class="card-text"><%=foundPost.content%></p>
+                      <p></p>
+                      <a href="/likes/<%=foundPost._id%>" class="btn btn-primary"><%=foundPost.likes.length%> Likes</a>
+                      <a href="/comment/<%=foundPost._id%>" class="btn btn-warning"> <%=foundPost.comments.length%> Comment</a>
+                    </div>
+                  </div>
+
+                <h1>Add a comment:</h1>
+            
+                <form action="/comment/<%=foundPost._id%>" method="post"> 
+                   
+                    <input type="text" name="comment" placeholder="Your Comment">
+                    <input type="submit">
+                </form>
+        
+            </div>
+            <%foundPost.comments.forEach(function(comment, index){%>
+                
+                <div class="card my-3" id="myCard">
+                    <div class="card-body">
+                      user |  <%=comment.user.username%>
+                      <br>
+                      <br>
+                      <%=comment.comment%>
+                      <br>
+                      <br>
+                        <a href="/likes/<%=foundPost._id%>/<%=index%>" class="btn btn-primary"><%=comment.likes.length%> Likes</a>
+                        <form action="/reply/<%=foundPost._id%>/<%=index%>" method="post">
+                            <input type="text" name="reply" placeholder="reply">
+                            <input type="submit" value="reply">
+                        </form>
+                        
+
+                    
+                   
+                    </div>
+                  </div>
+          
+            <%})%>
+            <%}%>
+        </div>
+        
+
+        </div>
+
+<%- include ./partials/footer.ejs%>

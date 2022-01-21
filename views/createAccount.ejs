@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style2.css">
+</head>
+<body>
+    <div id="main">
+        <div id="left">
+            <div id="welcome-emoji"></div>
+            <p>Hey There Junior!</p>
+            <p id="p-two">Welcome To The Family!</p>
+        </div>
+        <div id="right">
+            
+            <div id="form">
+                <p>Create Account</p>
+                <p id="small-text">(Student)</p>
+                <form action="/register" method="post">
+                    <input id="username" type="text" placeholder="Name" name="username">
+                    <h5>*User Already Exits!</h5>
+                    <!-- <input type="text" placeholder="Branch" name="branch"> -->
+                    <input type="text" placeholder="Your OGI Email" name="email">
+                    <input type="password" placeholder="Password" name="password">
+                    <!-- <input type="password" placeholder="Password Again" name="confirmPassword"> -->
+                    <input id="submit" type="submit">
+                </form>
+            </div>
+           
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+       var username =  document.querySelector("#username");
+       username.addEventListener('input', function(e){
+        //    console.log(username.value);
+        if(username.value.length > 0){
+            axios.get(`/check/${username.value}`)
+           .then(function(data){
+               if(data.data.user){
+                   username.style.color = 'red'
+                   document.querySelector("h5").style.display = "initial"
+               }
+               else{
+                username.style.color = 'black'
+                document.querySelector("h5").style.display = "none"
+
+               }
+            //    console.log(data.data.user);
+           })
+        }
+          
+       })
+    </script>
+</body>
+</html>
