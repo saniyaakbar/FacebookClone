@@ -132,3 +132,10 @@ button{
 a{
     color: black;
 }
+
+#searchBoxLeft #submitButton{
+    position: absolute;
+    left: 36%;
+    top: 0%;
+    padding: 5px;
+}

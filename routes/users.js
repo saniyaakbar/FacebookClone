@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 var passportLocalMongoose = require('passport-local-mongoose');
 
-mongoose.connect('mongodb://localhost/orion');
+mongoose.connect('mongodb://127.0.0.1/orion');
 
 const userSchema = mongoose.Schema({
   

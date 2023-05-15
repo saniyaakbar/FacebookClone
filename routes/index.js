@@ -9,6 +9,7 @@ const localStrategy = require('passport-local');
 // var currentUser = "no one";
 const multer  = require('multer');
 const sendMail = require('./nodemailer');
+const axios = require('axios')
 const { v4: uuidv4 } = require('uuid');
 
 var page = 0;
@@ -43,19 +44,22 @@ passport.use(new localStrategy(userModel.authenticate()));
 router.post('/profilePic',isLoggedIn, upload.single('picture'), function (req, res) {
    userModel.findOne({username: req.session.passport.user})
    .then(function(foundUser){
-    Jimp.read(`./public/images/uploads/${req.file.filename}`, (err, lenna) => {
-      if (err) throw err;
-      lenna
+    foundUser.profilePic.push(req.file.filename)
+    foundUser.save().then(function(){
+      res.redirect('/welPge')
+    // Jimp.read(`./public/images/uploads/${req.file.filename}`, (err, lenna) => {
+    //   if (err) throw err;
+    //   lenna
 
-        .resize(lenna.bitmap.width*0.5, lenna.bitmap.height*0.5) // resize
-        .quality(60) // set JPEG quality
+    //     .resize(lenna.bitmap.width*0.5, lenna.bitmap.height*0.5) // resize
+    //     .quality(60) // set JPEG quality
        
-        .write(`./public/images/uploads/${req.file.filename}`); // save
-        console.log(lenna.bitmap.width)
-        foundUser.profilePic.push(req.file.filename)
-        foundUser.save().then(function(){
-          res.redirect('/welPge')
-    });
+    //     .write(`./public/images/uploads/${req.file.filename}`); // save
+    //     console.log(lenna.bitmap.width)
+    //     foundUser.profilePic.push(req.file.filename)
+    //     foundUser.save().then(function(){
+    //       res.redirect('/welPge')
+    // });
     
      })
    })
@@ -318,7 +322,7 @@ router.get('/show',isLoggedIn, function(req, res){
 router.post('/createPost',upload.single('picture') ,isLoggedIn, function(req, res){
   userModel.findOne({username: req.session.passport.user})
   .then(function(foundUser){
-    postModel.create({
+      postModel.create({
       image: req.file.filename,
       content: req.body.post,
       postingUser: req.session.passport.user
@@ -484,10 +488,16 @@ router.post('/searchUser', isLoggedIn, function(req, res){
     .populate({
       path: "posts",
       populate: {path:"comments",
-      populate: {path: "user"}}
+      populate: {path: "user"}},
+      
     })
     .populate('sharedPosts')
+    .populate({
+      path: "story",
+      populate:{path:"currentStory"}
+    })
     .then(function(foundUser){
+      if(foundUser === null) res.send("User does not exist!");
       res.render('searchUser', {name: foundUser, user: currentUser, loggedin: true} )
     })
     
@@ -595,6 +605,34 @@ router.post('/PicPic', function(req, res){
       res.redirect('/uploadImageCheck')
     })
   })
+})
+
+router.get('/ausafPage', function(req, res){
+  res.render('Ausaf')
+})
+
+var instaUserData = {};
+
+router.post('/searchaxiosUser', function(req, res){
+
+
+  
+    axios({
+    method: 'GET',
+    url: 'https://instagram47.p.rapidapi.com/get_user_id',
+    params: {username: "ausaf._azam"},
+    headers: {
+      'X-RapidAPI-Key': 'cb6fe9ff5emsh19ecd41b690e52ep1c022ajsn16595e55f96f',
+      'X-RapidAPI-Host': 'instagram47.p.rapidapi.com'
+    }
+    })
+      .then(response => {
+        res.send(response);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  
 })
 
 

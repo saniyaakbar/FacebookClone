@@ -28,7 +28,7 @@
 </style>
 <body>
     <div id="main">
-        <%if(foundUser.followers.length < 0){%>
+        <%if(foundUser.followers.length <= 0){%>
             <h1>You have no followers</h1>
         <%}else{%>
             <%foundUser.followers.forEach(function(followers){%>

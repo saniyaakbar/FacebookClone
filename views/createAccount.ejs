@@ -39,9 +39,10 @@
        username.addEventListener('input', function(e){
         //    console.log(username.value);
         if(username.value.length > 0){
-            axios.get(`/check/${username.value}`)
+         axios.get(`/check/${username.value}`)
            .then(function(data){
                if(data.data.user){
+                   console.log(data.user)
                    username.style.color = 'red'
                    document.querySelector("h5").style.display = "initial"
                }
